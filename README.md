@@ -1,2 +1,2 @@
-# SpartaMarket_DFT_project
+# SpartaMarket_DRF_project
 you can see my practicing coding process.
