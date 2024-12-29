@@ -41,11 +41,11 @@ INSTALLED_APPS = [
      # DRF
     'rest_framework',
     'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',
     
     # my apps
-    'accounts',
-    'articles',
-]
+    "accounts", # 계정
+    "products", # 상품 
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
