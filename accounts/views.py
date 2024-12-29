@@ -5,6 +5,7 @@ from rest_framework.decorators import api_view, permission_classes, authenticati
 from rest_framework.response import Response
 from django.contrib.auth import authenticate
 from rest_framework_simplejwt.tokens import RefreshToken
+from django.shortcuts import get_object_or_404
 
 
 User = get_user_model()
@@ -62,4 +63,24 @@ def logout(request):
                       status=status.HTTP_400_BAD_REQUEST)
         
 # 성공적인 로그인 시 토큰을 발급하고, 실패 시 적절한 에러 메시지를 반환
+ 
+ 
+ 
+ 
+ 
+ 
+ #  로그인 상태 필요. 검증으로, 로그인 한 사용자만 프로필 조회 가능
+ 
+ @api_view(['GET']) 
+def profile(request, username):
+    user = request.user 
+    
+    if request.method == 'GET': # GET 요청인 경우 프로필 조회
+        user = get_object_or_404(User, username=username)   
+        try:
+            serializer = ProfileSerializer(user)
+
+        except User.DoesNotExist: # 사용자가 존재하지 않는 경우
+            return Response({"error": "사용자가 존재하지 않습니다다"}, status=status.HTTP_404_NOT_FOUND)
         
+        return Response(serializer.data, status=status.HTTP_200_OK)        

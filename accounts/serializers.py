@@ -33,7 +33,10 @@ class UserCreateSerializer(serializers.ModelSerializer):
         return user
 
 
+
+# 이 부분 잘 모르겠어요.
 class ProfileSerializer(serializers.ModelSerializer):
+    profile_image = serializers.SerializerMethodField()
     class Meta:
         model = User
         fields = ['username', 'email', 'name', 'nickname', 'birth_date', 'gender', 'bio', 'profile_image'] # 공개 필드
